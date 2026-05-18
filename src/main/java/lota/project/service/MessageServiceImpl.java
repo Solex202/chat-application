@@ -4,6 +4,7 @@ package lota.project.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lota.project.dto.MessageDtos;
+import lota.project.exception.MessageNotFoundException;
 import lota.project.model.Message;
 import lota.project.model.mapper.MessageMapper;
 import lota.project.repository.MessageRepository;
