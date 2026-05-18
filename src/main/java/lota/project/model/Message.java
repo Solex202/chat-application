@@ -3,6 +3,7 @@ package lota.project.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lota.project.model.enums.MessageType;
 
 import java.time.Instant;
 
@@ -52,7 +53,4 @@ public class Message {
         if (sentAt == null) sentAt = Instant.now();
     }
 
-    public enum MessageType {
-        CHAT, JOIN, LEAVE, TYPING
-    }
 }
