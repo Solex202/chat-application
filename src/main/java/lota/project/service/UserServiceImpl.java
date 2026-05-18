@@ -3,6 +3,7 @@ package lota.project.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lota.project.dto.MessageDtos;
+import lota.project.exception.UserNotFoundException;
 import lota.project.model.ChatUser;
 import lota.project.repository.UserRepository;
 import org.springframework.stereotype.Service;
