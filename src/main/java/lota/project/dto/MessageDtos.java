@@ -4,7 +4,7 @@ package lota.project.dto;
 
 
 import lombok.*;
-import lota.project.model.Message;
+import lota.project.model.enums.MessageType;
 
 import java.time.Instant;
 
@@ -26,7 +26,7 @@ public final class MessageDtos {
         private String senderId;
         private String receiverId;
         private String content;
-        private Message.MessageType type;
+        private MessageType type;
     }
 
     /** Outbound: server → client */
@@ -40,7 +40,7 @@ public final class MessageDtos {
         private String senderName;
         private String receiverId;
         private String content;
-        private Message.MessageType type;
+        private MessageType type;
         private Instant sentAt;
         private boolean delivered;
     }
