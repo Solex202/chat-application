@@ -13,8 +13,9 @@ import java.util.List;
 /**
  * Routes messages over STOMP.
  *
- * Each user subscribes to /user/{userId}/queue/messages  (private)
- * and /topic/events                                       (broadcasts)
+ * IMPORTANT: convertAndSendToUser() is used — NOT convertAndSend() with a
+ * manually built "/user/{id}/queue/..." path. Spring's user-destination
+ * resolver maps the username to the correct session(s) automatically.
  *
  * SRP  : only responsible for WebSocket delivery; no DB access.
  * DIP  : depends on SimpMessagingTemplate + MessageService interfaces.
@@ -24,19 +25,27 @@ import java.util.List;
 @Slf4j
 public class DeliveryServiceImpl implements DeliveryService {
 
-    /** STOMP-over-WebSocket template injected by Spring. */
-    private final SimpMessagingTemplate  messagingTemplate;
-    private final MessageService         messageService;
+    private final SimpMessagingTemplate messagingTemplate;
+    private final MessageService        messageService;
 
-    private static final String USER_QUEUE   = "/queue/messages";
-    private static final String EVENT_TOPIC  = "/topic/events";
+    private static final String USER_QUEUE  = "/queue/messages";
+    private static final String EVENT_TOPIC = "/topic/events";
 
     @Override
     public void deliver(MessageDtos.MessageResponse message) {
-        String destination = "/user/" + message.getReceiverId() + USER_QUEUE;
-        messagingTemplate.convertAndSend(destination, message);
-        log.info("Delivered msg #{} to {} via {}", message.getId(),
-                message.getReceiverId(), destination);
+        // Push to recipient — they receive it in real time
+        messagingTemplate.convertAndSendToUser(
+                message.getReceiverId(), USER_QUEUE, message);
+
+        // Echo the server-confirmed copy back to the sender as well.
+        // This gives the sender the real DB id, timestamp, and delivered flag
+        // so the UI doesn't need optimistic rendering at all.
+        messagingTemplate.convertAndSendToUser(
+                message.getSenderId(), USER_QUEUE, message);
+
+        log.info("Delivered msg #{}: {} -> {}",
+                message.getId(), message.getSenderId(), message.getReceiverId());
+
         messageService.markDelivered(message.getId());
     }
 
