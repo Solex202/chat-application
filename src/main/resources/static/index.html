@@ -10,13 +10,12 @@
         *{box-sizing:border-box;margin:0;padding:0}
         :root{
             --bg:#0f0f13;--panel:#16161d;--border:#252530;--accent:#7C3AED;
-            --accent2:#059669;--text:#e2e2ea;--muted:#5a5a72;--hover:#1e1e2a;
+            --text:#e2e2ea;--muted:#5a5a72;--hover:#1e1e2a;
             --msg-out:#7C3AED;--msg-in:#1e1e2a;
             --font:'Segoe UI',system-ui,sans-serif;
         }
         body{font-family:var(--font);background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}
 
-        /* ── TOP BAR ── */
         .topbar{height:48px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0}
         .topbar-logo{font-size:16px;font-weight:700;color:var(--accent)}
         .topbar-status{font-size:11px;color:var(--muted);margin-left:auto;display:flex;align-items:center;gap:5px}
@@ -24,11 +23,10 @@
         .status-dot.online{background:#22c55e;animation:pulse 2s infinite}
         @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 
-        /* ── LAYOUT ── */
         .app{display:flex;flex:1;overflow:hidden}
 
-        /* ── LOGIN ── */
-        .login-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(4px)}
+        /* LOGIN */
+        .login-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(4px)}
         .login-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:32px;width:320px;display:flex;flex-direction:column;gap:16px}
         .login-card h2{font-size:18px;font-weight:700;color:var(--accent)}
         .login-card p{font-size:12px;color:var(--muted);line-height:1.5}
@@ -39,12 +37,12 @@
         .btn-primary{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:10px;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s}
         .btn-primary:hover{background:#6D28D9}
 
-        /* ── SIDEBAR ── */
+        /* SIDEBAR */
         .sidebar{width:230px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
         .sidebar-hdr{padding:12px;border-bottom:1px solid var(--border);font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;justify-content:space-between}
         .user-count{background:var(--accent);color:#fff;font-size:9px;border-radius:8px;padding:1px 6px}
         .user-list{flex:1;overflow-y:auto;padding:6px}
-        .user-item{display:flex;align-items:center;gap:8px;padding:8px 8px;border-radius:7px;cursor:pointer;transition:background .15s;position:relative}
+        .user-item{display:flex;align-items:center;gap:8px;padding:8px;border-radius:7px;cursor:pointer;transition:background .15s;position:relative}
         .user-item:hover{background:var(--hover)}
         .user-item.active{background:#1e1427}
         .user-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:2px;background:var(--accent);border-radius:1px}
@@ -53,10 +51,10 @@
         .user-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .user-status{font-size:10px;color:var(--muted)}
         .unread-badge{background:var(--accent);color:#fff;font-size:9px;border-radius:8px;padding:1px 5px;flex-shrink:0}
-        .presence-dot{width:8px;height:8px;border-radius:50%;border:2px solid var(--panel);position:absolute;bottom:6px;left:32px;background:#666;flex-shrink:0}
+        .presence-dot{width:8px;height:8px;border-radius:50%;border:2px solid var(--panel);position:absolute;bottom:6px;left:32px;background:#555}
         .presence-dot.on{background:#22c55e}
 
-        /* ── CHAT AREA ── */
+        /* CHAT */
         .chat-area{flex:1;display:flex;flex-direction:column;overflow:hidden}
         .chat-hdr{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0;background:var(--panel)}
         .chat-hdr .avatar{width:36px;height:36px;font-size:13px}
@@ -71,8 +69,8 @@
         .msg-row{display:flex;flex-direction:column;max-width:68%}
         .msg-row.out{align-self:flex-end;align-items:flex-end}
         .msg-row.in{align-self:flex-start;align-items:flex-start}
-        .msg-bubble{padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.5;word-break:break-word;animation:msgIn .2s ease}
-        @keyframes msgIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+        .msg-bubble{padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.5;word-break:break-word;animation:msgIn .18s ease}
+        @keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
         .msg-row.out .msg-bubble{background:var(--msg-out);color:#fff;border-bottom-right-radius:4px}
         .msg-row.in  .msg-bubble{background:var(--msg-in);color:var(--text);border-bottom-left-radius:4px}
         .msg-meta{font-size:9px;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:4px}
@@ -85,15 +83,10 @@
         .typing-dot:nth-child(2){animation-delay:.2s}.typing-dot:nth-child(3){animation-delay:.4s}
         @keyframes tdot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
 
-        .empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted)}
-        .empty-state .big{font-size:40px}
-        .empty-state p{font-size:13px;text-align:center;max-width:220px;line-height:1.6}
-
-        /* ── INPUT ── */
         .input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;background:var(--panel);flex-shrink:0}
         .msg-input{flex:1;background:#0a0a0f;border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-size:13px;outline:none;resize:none;font-family:var(--font);transition:border-color .2s;max-height:120px}
         .msg-input:focus{border-color:var(--accent)}
-        .send-btn{width:40px;height:40px;background:var(--accent);border:none;border-radius:10px;color:#fff;font-size:16px;cursor:pointer;transition:background .15s,transform .1s;flex-shrink:0}
+        .send-btn{width:40px;height:40px;background:var(--accent);border:none;border-radius:10px;color:#fff;font-size:16px;cursor:pointer;transition:background .15s,transform .1s;flex-shrink:0;align-self:flex-end}
         .send-btn:hover{background:#6D28D9}
         .send-btn:active{transform:scale(.93)}
         .send-btn:disabled{background:var(--border);cursor:default}
@@ -102,23 +95,20 @@
         .no-chat .icon{font-size:48px;opacity:.3}
         .no-chat p{font-size:13px;max-width:220px;text-align:center;line-height:1.6}
 
-        /* ── SYSTEM TOAST ── */
         .toast-container{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:6px;z-index:200;pointer-events:none}
         .toast{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:11px;color:var(--muted);animation:toastIn .25s ease;max-width:220px}
         @keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-        /* scrollbar */
         .user-list::-webkit-scrollbar{width:3px}
         .user-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
     </style>
 </head>
 <body>
 
-<!-- LOGIN OVERLAY -->
 <div class="login-overlay" id="login-overlay">
     <div class="login-card">
         <h2>💬 SpringChat</h2>
-        <p>Enter a username to join. Share this page in multiple tabs to simulate multiple users.</p>
+        <p>Enter a username to join. Open multiple tabs to simulate different users chatting.</p>
         <div class="field">
             <label>Username (no spaces)</label>
             <input id="login-id" type="text" placeholder="e.g. alice" maxlength="20" autofocus>
@@ -131,7 +121,6 @@
     </div>
 </div>
 
-<!-- TOP BAR -->
 <div class="topbar">
     <span class="topbar-logo">💬 SpringChat</span>
     <span id="me-label" style="font-size:12px;color:var(--muted)"></span>
@@ -141,27 +130,22 @@
     </div>
 </div>
 
-<!-- MAIN -->
 <div class="app">
-    <!-- SIDEBAR -->
     <div class="sidebar">
         <div class="sidebar-hdr">
-            Users
-            <span class="user-count" id="user-count">0</span>
+            Users <span class="user-count" id="user-count">0</span>
         </div>
         <div class="user-list" id="user-list">
             <div style="font-size:11px;color:var(--muted);text-align:center;padding:20px">Connect to see users</div>
         </div>
     </div>
 
-    <!-- CHAT -->
     <div class="chat-area" id="chat-area">
         <div class="no-chat" id="no-chat">
             <div class="icon">💬</div>
             <p>Select a user from the sidebar to start chatting</p>
         </div>
 
-        <!-- active conversation -->
         <div id="conversation" style="display:none;flex:1;flex-direction:column;overflow:hidden">
             <div class="chat-hdr">
                 <div class="avatar" id="peer-avatar"></div>
@@ -173,9 +157,7 @@
             <div class="messages" id="messages">
                 <div class="typing-row" id="typing-row">
                     <div class="typing-bubble">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
                     </div>
                 </div>
             </div>
@@ -189,33 +171,32 @@
     </div>
 </div>
 
-<!-- TOASTS -->
 <div class="toast-container" id="toast-container"></div>
 
 <script>
-    // ── STATE ─────────────────────────────────────────────────────────────────
+    // ── STATE ──────────────────────────────────────────────────────────────────
     const state = {
-        me: null,           // { id, displayName }
+        me: null,
         stompClient: null,
         connected: false,
         activePeer: null,
         users: {},          // userId → { id, displayName, online }
         messages: {},       // peerId → [msg, ...]
-        unread: {},         // peerId → count
+        unread: {},
         typingTimers: {},
     };
 
-    const COLORS = ['#7C3AED','#059669','#D97706','#DB2777','#0284C7','#DC2626','#7C3AED'];
+    const COLORS = ['#7C3AED','#059669','#D97706','#DB2777','#0284C7','#DC2626'];
     function colorFor(id) {
         let h = 0;
         for (let i = 0; i < id.length; i++) h = id.charCodeAt(i) + (h << 5) - h;
         return COLORS[Math.abs(h) % COLORS.length];
     }
     function initials(name) {
-        return name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+        return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
     }
 
-    // ── LOGIN ─────────────────────────────────────────────────────────────────
+    // ── LOGIN ──────────────────────────────────────────────────────────────────
     document.getElementById('login-id').addEventListener('keydown', e => {
         if (e.key === 'Enter') document.getElementById('login-name').focus();
     });
@@ -224,68 +205,68 @@
     });
 
     function doLogin() {
-        const id   = document.getElementById('login-id').value.trim().replace(/\s+/g,'_');
+        const id   = document.getElementById('login-id').value.trim().replace(/\s+/g, '_');
         const name = document.getElementById('login-name').value.trim() || id;
         if (!id) { document.getElementById('login-id').focus(); return; }
         state.me = { id, displayName: name };
         document.getElementById('login-overlay').style.display = 'none';
-        document.getElementById('me-label').textContent = `Logged in as ${name} (${id})`;
+        document.getElementById('me-label').textContent = `${name} (${id})`;
         connectWS();
     }
 
-    // ── WEBSOCKET ─────────────────────────────────────────────────────────────
+    // ── WEBSOCKET ──────────────────────────────────────────────────────────────
     function connectWS() {
-        const sock = new SockJS('/ws');
+        const sock   = new SockJS('/ws');
         const client = Stomp.over(sock);
-        client.debug = null;
+        client.debug  = null; // silence STOMP debug logs
         state.stompClient = client;
 
-        const headers = {
-            userId:      state.me.id,
-            displayName: state.me.displayName,
-        };
-
-        client.connect(headers, onConnected, onError);
+        client.connect(
+            { userId: state.me.id, displayName: state.me.displayName },
+            onConnected,
+            onError
+        );
     }
 
     function onConnected() {
         state.connected = true;
         setConnStatus(true);
 
-        // Subscribe to personal inbox
-        state.stompClient.subscribe(
-            `/user/${state.me.id}/queue/messages`,
-            frame => handleIncomingMessage(JSON.parse(frame.body))
-        );
+        // ── KEY FIX ──────────────────────────────────────────────────────────────
+        // Subscribe to /user/queue/messages (WITHOUT the userId in the path).
+        // When using convertAndSendToUser() on the server, Spring's
+        // UserDestinationMessageHandler prepends the session-specific prefix
+        // automatically. The client must subscribe to /user/queue/... (no username).
+        // ─────────────────────────────────────────────────────────────────────────
+        state.stompClient.subscribe('/user/queue/messages', frame => {
+            handleIncomingMessage(JSON.parse(frame.body));
+        });
 
-        // Subscribe to system events
+        // System events (joins, leaves, typing)
         state.stompClient.subscribe('/topic/events', frame => {
             handleSystemEvent(JSON.parse(frame.body));
         });
 
-        // Load existing users from REST
         loadUsers();
 
-        // Load pending messages
+        // Flush any messages that arrived while we were offline
         fetch(`/api/messages/${state.me.id}/pending`)
             .then(r => r.json())
             .then(msgs => msgs.forEach(m => storeAndRender(m)));
     }
 
-    function onError(err) {
+    function onError() {
         state.connected = false;
         setConnStatus(false);
         setTimeout(connectWS, 3000);
     }
 
-    // ── REST ──────────────────────────────────────────────────────────────────
+    // ── REST ───────────────────────────────────────────────────────────────────
     function loadUsers() {
         fetch('/api/users')
             .then(r => r.json())
             .then(users => {
-                users.forEach(u => {
-                    if (u.id !== state.me.id) state.users[u.id] = u;
-                });
+                users.forEach(u => { if (u.id !== state.me.id) state.users[u.id] = u; });
                 renderUserList();
             });
     }
@@ -299,35 +280,25 @@
             });
     }
 
-    // ── SEND ──────────────────────────────────────────────────────────────────
+    // ── SEND ───────────────────────────────────────────────────────────────────
     function sendMsg() {
-        const input = document.getElementById('msg-input');
+        const input   = document.getElementById('msg-input');
         const content = input.value.trim();
         if (!content || !state.activePeer || !state.connected) return;
 
-        const payload = {
+        // Send to server — do NOT optimistically render here.
+        // The server echoes the confirmed message back to the sender via
+        // convertAndSendToUser(senderId, ...) so it arrives through the
+        // subscription just like any incoming message, with the real id + timestamp.
+        state.stompClient.send('/app/chat.send', {}, JSON.stringify({
             senderId:   state.me.id,
             receiverId: state.activePeer,
             content,
             type: 'CHAT',
-        };
+        }));
 
-        state.stompClient.send('/app/chat.send', {}, JSON.stringify(payload));
         input.value = '';
         input.style.height = 'auto';
-
-        // Optimistically render on sender side
-        const optimistic = {
-            id: null,
-            senderId: state.me.id,
-            senderName: state.me.displayName,
-            receiverId: state.activePeer,
-            content,
-            type: 'CHAT',
-            sentAt: new Date().toISOString(),
-            delivered: false,
-        };
-        storeAndRender(optimistic);
     }
 
     let typingTimeout;
@@ -335,18 +306,24 @@
         if (!state.activePeer || !state.connected) return;
         clearTimeout(typingTimeout);
         state.stompClient.send('/app/chat.typing', {}, JSON.stringify({
-            senderId: state.me.id,
+            senderId:   state.me.id,
             receiverId: state.activePeer,
         }));
         typingTimeout = setTimeout(() => {}, 2000);
     }
 
-    // ── INBOUND ───────────────────────────────────────────────────────────────
+    // ── INBOUND ────────────────────────────────────────────────────────────────
     function handleIncomingMessage(msg) {
+        // This fires for BOTH the receiver AND the sender (server echoes back).
+        // For the sender: msg.senderId === state.me.id → peerId is receiverId.
+        // For the receiver: msg.senderId !== state.me.id → peerId is senderId.
         storeAndRender(msg);
-        // Unread badge if not looking at that convo
-        if (state.activePeer !== msg.senderId) {
-            state.unread[msg.senderId] = (state.unread[msg.senderId] || 0) + 1;
+
+        const peerId = msg.senderId === state.me.id ? msg.receiverId : msg.senderId;
+
+        // Show unread badge if the conversation isn't currently open
+        if (state.activePeer !== peerId && msg.senderId !== state.me.id) {
+            state.unread[peerId] = (state.unread[peerId] || 0) + 1;
             renderUserList();
             toast(`New message from ${msg.senderName || msg.senderId}`);
         }
@@ -373,25 +350,25 @@
             }
             toast(`${state.users[event.userId]?.displayName || event.userId} went offline`);
         } else if (event.eventType === 'TYPING') {
-            if (state.activePeer === event.userId) {
-                showTyping(event.userId);
-            }
+            if (state.activePeer === event.userId) showTyping(event.userId);
         }
     }
 
     function storeAndRender(msg) {
         const peerId = msg.senderId === state.me.id ? msg.receiverId : msg.senderId;
         if (!state.messages[peerId]) state.messages[peerId] = [];
-        // de-dup by id
+
+        // De-duplicate: skip if we already have a message with the same DB id
         if (msg.id && state.messages[peerId].some(m => m.id === msg.id)) return;
+
         state.messages[peerId].push(msg);
         if (state.activePeer === peerId) renderMessages();
     }
 
-    // ── RENDER USER LIST ──────────────────────────────────────────────────────
+    // ── RENDER USER LIST ───────────────────────────────────────────────────────
     function renderUserList() {
-        const el  = document.getElementById('user-list');
-        const cnt = document.getElementById('user-count');
+        const el    = document.getElementById('user-list');
+        const cnt   = document.getElementById('user-count');
         const users = Object.values(state.users);
         cnt.textContent = users.filter(u => u.online).length;
 
@@ -400,17 +377,19 @@
             return;
         }
 
-        // sort: online first, then alpha
-        users.sort((a, b) => (b.online ? 1 : 0) - (a.online ? 1 : 0) || a.displayName.localeCompare(b.displayName));
+        users.sort((a, b) =>
+            (b.online ? 1 : 0) - (a.online ? 1 : 0) ||
+            a.displayName.localeCompare(b.displayName)
+        );
 
         el.innerHTML = users.map(u => {
-            const col   = colorFor(u.id);
-            const init  = initials(u.displayName);
-            const active= state.activePeer === u.id ? 'active' : '';
-            const unread= state.unread[u.id] ? `<span class="unread-badge">${state.unread[u.id]}</span>` : '';
+            const col    = colorFor(u.id);
+            const active = state.activePeer === u.id ? 'active' : '';
+            const unread = state.unread[u.id]
+                ? `<span class="unread-badge">${state.unread[u.id]}</span>` : '';
             return `
       <div class="user-item ${active}" onclick="openChat('${u.id}')">
-        <div class="avatar" style="background:${col}20;color:${col}">${init}</div>
+        <div class="avatar" style="background:${col}20;color:${col}">${initials(u.displayName)}</div>
         <div class="presence-dot ${u.online ? 'on' : ''}"></div>
         <div class="user-meta">
           <div class="user-name">${u.displayName}</div>
@@ -421,21 +400,24 @@
         }).join('');
     }
 
-    // ── RENDER MESSAGES ───────────────────────────────────────────────────────
+    // ── RENDER MESSAGES ────────────────────────────────────────────────────────
     function renderMessages() {
         const el   = document.getElementById('messages');
         const msgs = state.messages[state.activePeer] || [];
-
-        // keep typing indicator
         const typing = document.getElementById('typing-row');
+
         el.innerHTML = '';
         el.appendChild(typing);
 
         msgs.forEach(m => {
             const isOut = m.senderId === state.me.id;
-            const time  = m.sentAt ? new Date(m.sentAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
-            const tick  = isOut ? `<span class="tick">${m.delivered ? '✓✓' : '✓'}</span>` : '';
-            const row   = document.createElement('div');
+            const time  = m.sentAt
+                ? new Date(m.sentAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                : '';
+            const tick = isOut
+                ? `<span class="tick">${m.delivered ? '✓✓' : '✓'}</span>`
+                : '';
+            const row = document.createElement('div');
             row.className = `msg-row ${isOut ? 'out' : 'in'}`;
             row.innerHTML = `
       <div class="msg-bubble">${escHtml(m.content)}</div>
@@ -445,24 +427,25 @@
         el.scrollTop = el.scrollHeight;
     }
 
-    // ── OPEN CHAT ─────────────────────────────────────────────────────────────
+    // ── OPEN CHAT ──────────────────────────────────────────────────────────────
     function openChat(peerId) {
-        state.activePeer = peerId;
+        state.activePeer  = peerId;
         state.unread[peerId] = 0;
         const peer = state.users[peerId] || { id: peerId, displayName: peerId, online: false };
         const col  = colorFor(peerId);
 
-        document.getElementById('no-chat').style.display       = 'none';
-        document.getElementById('conversation').style.display  = 'flex';
-        document.getElementById('peer-avatar').textContent     = initials(peer.displayName);
-        document.getElementById('peer-avatar').style.background= col + '20';
-        document.getElementById('peer-avatar').style.color     = col;
-        document.getElementById('peer-name').textContent       = peer.displayName;
-        document.getElementById('peer-sub').textContent        = peer.online ? 'Online' : 'Offline';
-        document.getElementById('send-btn').disabled           = !state.connected;
+        document.getElementById('no-chat').style.display      = 'none';
+        document.getElementById('conversation').style.display = 'flex';
+        document.getElementById('peer-avatar').textContent    = initials(peer.displayName);
+        document.getElementById('peer-avatar').style.background = col + '20';
+        document.getElementById('peer-avatar').style.color   = col;
+        document.getElementById('peer-name').textContent     = peer.displayName;
+        document.getElementById('peer-sub').textContent      = peer.online ? 'Online' : 'Offline';
+        document.getElementById('send-btn').disabled         = !state.connected;
 
         renderUserList();
 
+        // Load history from DB on first open; already-loaded conversations render instantly
         if (!state.messages[peerId]) {
             loadHistory(peerId);
         } else {
@@ -470,7 +453,7 @@
         }
     }
 
-    // ── TYPING INDICATOR ──────────────────────────────────────────────────────
+    // ── TYPING INDICATOR ───────────────────────────────────────────────────────
     function showTyping(peerId) {
         if (state.activePeer !== peerId) return;
         const row = document.getElementById('typing-row');
@@ -480,12 +463,12 @@
         document.getElementById('messages').scrollTop = 9999;
     }
 
-    // ── UTILS ─────────────────────────────────────────────────────────────────
+    // ── UTILS ──────────────────────────────────────────────────────────────────
     function setConnStatus(online) {
-        document.getElementById('conn-dot').className  = 'status-dot' + (online ? ' online' : '');
+        document.getElementById('conn-dot').className     = 'status-dot' + (online ? ' online' : '');
         document.getElementById('conn-label').textContent = online ? 'Connected' : 'Reconnecting…';
-        if (document.getElementById('send-btn'))
-            document.getElementById('send-btn').disabled = !online;
+        const btn = document.getElementById('send-btn');
+        if (btn) btn.disabled = !online;
     }
 
     function autoResize(el) {
@@ -494,14 +477,15 @@
     }
 
     function escHtml(s) {
-        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-            .replace(/"/g,'&quot;').replace(/\n/g,'<br>');
+        return s
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/\n/g, '<br>');
     }
 
     function toast(msg) {
         const c = document.getElementById('toast-container');
         const t = document.createElement('div');
-        t.className = 'toast';
+        t.className   = 'toast';
         t.textContent = msg;
         c.appendChild(t);
         setTimeout(() => t.remove(), 3500);
